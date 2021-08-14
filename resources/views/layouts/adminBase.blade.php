@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -23,20 +24,179 @@
         type="text/css" />
     <link href="{{ asset('assets/backend/assets/plugins/bootstrap-select/bootstrap-select.min.css') }}"
         rel="stylesheet" />
-
     @livewireStyles
 </head>
-<body>
-   <div id="main-wrapper">
-        
 
-        @include('livewire.admin.backend.admin_nav')
-        @include('livewire.admin.backend.admin_sidenav')
-        @yield('content')
-        
-       
-        @include('livewire.admin.backend.admin_footer')
-        
+<body>
+    <div id="main-wrapper">
+
+
+        <header class="topbar">
+            <nav class="navbar top-navbar navbar-expand-md navbar-light">
+                <!-- ============================================================== -->
+                <!-- Logo -->
+                <!-- ============================================================== -->
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">
+                        <!-- Logo icon --><b>
+                            <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
+                            <!-- Light Logo icon -->
+                            <img src="{{ asset('assets/backend/assets/images/logo-text.png') }}" alt="homepage"
+                                class="light-logo" />
+                        </b>
+                        <!--End Logo icon -->
+                        <!-- Logo text -->
+                        <span>
+                            <!-- dark Logo text -->
+                            <img src="{{ asset('assets/backend/assets/images/logo-text.png') }}" alt="homepage"
+                                class="dark-logo" />
+                            <!-- Light Logo text -->
+                            <img src="{{ asset('assets/backend/assets/images/logo-light-text.png') }}"
+                                class="light-logo" alt="homepage" />
+                        </span>
+                    </a>
+                </div>
+                <!-- ============================================================== -->
+                <!-- End Logo -->
+                <!-- ============================================================== -->
+                <div class="navbar-collapse">
+                    <!-- ============================================================== -->
+                    <!-- toggle and nav items -->
+                    <!-- ============================================================== -->
+                    <ul class="navbar-nav mr-auto mt-md-0">
+                        <!-- This is  -->
+                        <li class="nav-item"> <a
+                                class="nav-link nav-toggler hidden-md-up text-muted waves-effect waves-dark"
+                                href="javascript:void(0)"><i class="mdi mdi-menu"></i></a> </li>
+                        <li class="nav-item m-l-10"> <a
+                                class="nav-link sidebartoggler hidden-sm-down text-muted waves-effect waves-dark"
+                                href="javascript:void(0)"><i class="ti-menu"></i></a> </li>
+                        <!-- ============================================================== -->
+                    </ul>
+                    <!-- ============================================================== -->
+                    <!-- User profile and search -->
+                    <!-- ============================================================== -->
+                    <ul class="navbar-nav my-lg-0">
+                        <!-- ============================================================== -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href=""
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <img src="{{ asset('assets/backend/assets/images/users/profile.png') }}" alt="user"
+                                    class="profile-pic" /></a>
+                            <div class="dropdown-menu dropdown-menu-right scale-up">
+                                <ul class="dropdown-user">
+                                    <li>
+                                        <div class="dw-user-box">
+                                            <div class="u-img"><img
+                                                    src="{{ asset('assets/backend/assets/images/users/profile.png') }}"
+                                                    alt="user"></div>
+                                            <div class="u-text">
+                                                <h4>{{ Auth::user()->name }}</h4>
+                                                <p class="text-muted">{{ Auth::user()->email }}</p>
+                                                <a href="#" onclick="event.preventDefault();
+                                                         document.getElementById('logout-form').submit();"><i
+                                                        class="fa fa-power-off"></i> Logout</a>
+                                            </div>
+                                        </div>
+                                    </li>
+
+                                    <form id="logout-form" action="#" method="POST" style="display: none;">
+                                        {{ csrf_field() }}
+                                    </form>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <style>
+            .sidebar-nav>ul>li>a.active {
+                background: #ffffff;
+            }
+        </style>
+
+        <aside class="left-sidebar">
+            <!-- Sidebar scroll-->
+            <div class="scroll-sidebar">
+                <!-- User profile -->
+                <div class="user-profile">
+                    <!-- User profile image -->
+                    <div class="profile-img">
+                        <img src="{{ asset('assets/backend/assets/images/users/1.jpg') }}" alt="user" />
+                        <!-- this is blinking heartbit-->
+                        <div class="notify setpos"><span class="heartbit"></span> <span class="point"></span></div>
+                    </div>
+                    <!-- User profile text-->
+                    <div class="profile-text">
+
+                        <h5>{{ Auth::user()->name }}</h5>
+
+                        <a href="#" class="dropdown-toggle u-dropdown" data-toggle="dropdown" role="button"
+                            aria-haspopup="true" aria-expanded="true"><i class="mdi mdi-settings"></i></a>
+                        <a href="{{ Auth::user()->email }}" class="" data-toggle="tooltip" title="Email"><i
+                                class="mdi mdi-gmail"></i></a>
+                        <a href="#" onclick="event.preventDefault();
+                                                         document.getElementById('logout-form').submit();" class=""
+                            data-toggle="tooltip" title="Logout"><i class="mdi mdi-power"></i></a>
+                        <form id="logout-form" action="#" method="POST" style="display: none;">
+                            {{ csrf_field() }}
+                        </form>
+
+                        <div class="dropdown-menu animated flipInY">
+                            <!-- text-->
+                            <a href="#" class="dropdown-item"><i class="ti-user"></i> My Profile</a>
+                            <!-- text-->
+
+                            <div class="dropdown-divider"></div>
+                            <!-- text-->
+                            <a href="" class="dropdown-item" onclick="event.preventDefault();
+                                                         document.getElementById('logout-form').submit();"><i
+                                    class="fa fa-power-off"></i>
+                                Logout
+                            </a>
+                            <form id="logout-form" action="#" method="POST" style="display: none;">
+                                {{ csrf_field() }}
+                            </form>
+
+                        </div>
+
+                    </div>
+                </div>
+                <!-- End User profile text-->
+
+                <!-- Sidebar navigation-->
+                <nav class="sidebar-nav">
+                    <ul id="sidebarnav">
+
+                        <li class="nav-devider"></li>
+                        <li>
+                            <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i
+                                    class="mdi mdi-tooltip-edit"></i>
+                                <span class="hide-menu">Manage Category </span>
+                            </a>
+                            <ul aria-expanded="false" class="collapse">
+                                <li><a href="{{ route('admin.category') }}">All Category </a></li>
+                            </ul>
+                        </li>
+
+                    </ul>
+
+                </nav>
+                <!-- End Sidebar navigation -->
+            </div>
+            <!-- End Sidebar scroll-->
+        </aside>
+
+        {{$slot}}
+
+        <!-- footer -->
+        <!-- ============================================================== -->
+        <footer class="footer"> © Developed by - KRP Solutions </footer>
+        <!-- ============================================================== -->
+        <!-- End footer -->
+
+
     </div>
     <script src="{{ asset('assets/backend/assets/plugins/jquery/jquery.min.js') }}"></script>
     <!-- Bootstrap tether Core JavaScript -->
